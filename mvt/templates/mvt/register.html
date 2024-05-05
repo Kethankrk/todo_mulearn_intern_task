@@ -1,14 +1,19 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TODO APP | REGISTER</title>
+    <link rel="stylesheet" href={% static 'style.css' %} />
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    <form method="POST" autocomplete="off">
+  <body class="flex justify-center items-center min-h-screen bg-slate-50">
+    <form method="POST" autocomplete="off" id="register" class="bg-slate-200 px-10 py-3 flex flex-col gap-4 rounded-xl w-full max-w-[600px]">
+      <p class="text-center font-semibold text-xl">CREATE NEW ACCOUNT</p>
       {% csrf_token %} {{register_form.as_p}}
-      <input type="submit" value="Register">REGISTER</input>
+      <button type="submit" value="Register" class="w-full bg-green-400 hover:bg-green-500 font-medium py-1 rounded-lg">REGISTER</button>
+      <a href="login" class="text-sm text-blue-600 text-center cursor-pointer hover:underline">Already have an acoount? Login</a>
     </form>
   </body>
 </html>
