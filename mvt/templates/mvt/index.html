@@ -1,5 +1,5 @@
+{% load static %}
 <!DOCTYPE html>
-
 <html>
   <head>
     <meta charset="utf-8" />
@@ -7,23 +7,31 @@
     <title>TODO APP</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="" />
+    <link rel="stylesheet" href={% static 'style.css' %} />
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-slate-50">
-    <nav class="h-[60px] flex items-center justify-between px-10 bg-slate-200">
-      <p>TODO APP</p>
-      <ul class="flex gap-5 text-sm underline cursor-pointer">
-        <li>Home</li>
-        <li>Profile</li>
-      </ul>
-      <button class="px-4 py-1 rounded-md bg-black text-white hover:scale-105">Logout</button>
-    </nav>
+    {% include 'mvt/navbar.html' %}
     <h1 class="text-center font-bold text-3xl mt-10 mb-14">TODO</h1>
-    <div class="flex justify-center w-full">
+    <div class="flex justify-center w-full flex-col gap-6 items-center">
+      {% if not todos %} <p>Nothing here</p> {% endif %}
       {% for todo in todos %}
        {% include 'mvt/todo.html' with context_variable=todo %}
       {% endfor %}
     </div>
+    <div class="flex justify-center mt-10">
+      <button class="px-4 py-2 bg-green-400 rounded-xl font-medium text-sm hover:bg-green-500 hover:scale-105" id="add-todo">ADD TODO</button>
+    </div>
+    <div class="absolute top-0 left-0 w-full h-screen justify-center items-center hidden" id="add-todo-modal">
+      <div class="bg-black absolute w-full h-screen opacity-30"></div>
+      <form method="POST" class="p-10 relative bg-slate-200 rounded-lg flex flex-col gap-5 w-full max-w-[600px]">
+        <h1 class="font-semibold text-center text-xl">NEW TODO</h1>
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="bg-green-400 py-1 rounded-lg font-medium hover:bg-green-500">SUBMIT</button>
+        <button class="bg-red-400 py-1 rounded-lg font-medium hover:bg-red-500" type="button" id="form-cancle">CANCLE</button>
+      </form>
+    </div>
   </body>
+  <script src={% static 'index.js' %}></script>
 </html>

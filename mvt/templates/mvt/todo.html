@@ -1,11 +1,19 @@
 <label for={{todo.id}} class="min-w-[400px] w-full max-w-[600px]">
 <div class="flex justify-between items-center bg-slate-100 px-5 py-2 rounded-xl hover:bg-slate-200 shadow-md">
-
-        <input type="checkbox" checked={{ todo.completed }} id={{todo.id}}>
         <p class="font-semibold">{{ todo.title }}</p>
-        <div>
+        {% if todo.is_expired %}<p class="px-1 bg-orange-200 rounded-lg text-sm font-thin"> expired </p>{% endif %}
+        <div class="flex gap-2">
             <button class="rounded-md text-sm bg-yellow-200 px-2 py-2 hover:bg-yellow-300">Update</button>
-            <button class="rounded-md text-sm bg-red-200 px-2 py-2 hover:bg-red-300">Delete</button>
+            <form method="POST" action="{% url 'delete_todo' %}">
+                {% csrf_token %}
+                <input type="hidden" name="todo_id" value="{{ todo.id }}">
+                <button type="submit" class="rounded-md text-sm bg-red-200 px-2 py-2 hover:bg-red-300 delete-todo">Delete</button>
+            </form>
+            <form method="POST" action="{% url 'done' %}">
+                {% csrf_token %}
+                <input type="hidden" name="todo_id" value="{{ todo.id }}">
+                <button class="rounded-md text-sm bg-green-200 px-2 py-2 hover:bg-green-300">Done</button>
+            </form>
         </div>
     </div>
 </label>
