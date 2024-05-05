@@ -13,5 +13,5 @@ class Todo(models.Model):
     description = models.TextField()
     completed = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    completed_at = models.DateTimeField(null=True)
+    completed_at = models.DateTimeField(null=True, blank=True)
     user = models.ForeignKey(User, related_name="todos", on_delete=models.CASCADE)
