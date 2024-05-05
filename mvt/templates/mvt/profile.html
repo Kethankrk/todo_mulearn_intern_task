@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>TODO APP</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href={% static 'style.css' %} />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-slate-50">
+    {% include 'mvt/navbar.html' %}
+    <main class="min-h-screen pt-10">
+        <h1 class="text-center font-medium text-3xl">Welcome {{user.username}}</h1>
+        <div class="bg-slate-200 rounded-lg p-10 max-w-[600px] mx-auto mt-5">
+            <p class="font-semibold text-xl">Dashboard</p>
+            <p>created: {{total}}</p>
+            <p>completed: {{completed}}</p>
+            <p>expired: {{expired}}</p>
+            <p>pending: {{pending}}</p>
+        </div>
+    </main>
+  </body>
+  <script src={% static 'index.js' %}></script>
+</html>

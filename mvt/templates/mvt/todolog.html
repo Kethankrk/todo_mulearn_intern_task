@@ -20,6 +20,7 @@
                         <p>{{todo.title}}</p>
                         <p class="text-[10px]">created at: {{todo.created_at}} </p>
                         <p class="text-[10px]">completed at: {{todo.completed_at}} </p>
+                        <p class="text-[10px]">was expired: {{todo.is_expired}} </p>
                     </div>
                     <form method="POST" action="{% url 'delete_todo' %}">
                         {% csrf_token %}
