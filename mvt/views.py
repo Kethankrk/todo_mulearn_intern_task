@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from . import forms, models
 from django.contrib.auth import authenticate, login, logout
 from django.utils import timezone
+from django.db.models import F
 
 def homeView(request):
     user = request.user
@@ -102,3 +103,15 @@ def todoUpdateView(request):
 
 
     return render(request, 'mvt/updateTodo.html', context=context)
+
+
+
+def profileView(request):
+    user = request.user
+    todos = user.todos.all()
+    total_todo = todos.count()
+    completed_todo = todos.filter(completed=True).count()
+    expired_todo = todos.filter(expire__lt=timezone.now()).count()
+    pending_todo = todos.filter(completed=False, expire__gt=timezone.now()).count()
+    context = {"total": total_todo, "user": user, "completed": completed_todo, "expired": expired_todo, "pending": pending_todo}
+    return render(request, 'mvt/profile.html', context=context)
