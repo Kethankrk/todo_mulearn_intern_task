@@ -1,0 +1,11 @@
+<label for={{todo.id}} class="min-w-[400px] w-full max-w-[600px]">
+<div class="flex justify-between items-center bg-slate-100 px-5 py-2 rounded-xl hover:bg-slate-200 shadow-md">
+
+        <input type="checkbox" checked={{ todo.completed }} id={{todo.id}}>
+        <p class="font-semibold">{{ todo.title }}</p>
+        <div>
+            <button class="rounded-md text-sm bg-yellow-200 px-2 py-2 hover:bg-yellow-300">Update</button>
+            <button class="rounded-md text-sm bg-red-200 px-2 py-2 hover:bg-red-300">Delete</button>
+        </div>
+    </div>
+</label>
