@@ -9,5 +9,6 @@ urlpatterns = [
     path("delete", views.deleteTodoView, name="delete_todo"),
     path("done", views.markTodoDoneView, name="done"),
     path("todolog", views.todoLogView, name="todolog"),
+    path("update-todo/", views.todoUpdateView, name="update"),
     path("", views.homeView, name="home"),
 ]

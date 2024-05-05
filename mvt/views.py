@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from . import forms, models
 from django.contrib.auth import authenticate, login, logout
 from django.utils import timezone
@@ -78,7 +78,27 @@ def markTodoDoneView(request):
 
 def todoLogView(request):
     user = request.user
-
     todos = user.todos.filter(completed=True)
     context = {'todos': todos}
     return render(request, 'mvt/todolog.html', context=context)
+
+def todoUpdateView(request):
+    if request.method == "POST":
+        todo_id = request.POST.get("todo_id")
+        todo = get_object_or_404(models.Todo, pk=todo_id)
+        form = forms.TodoForm(data=request.POST, instance=todo)
+        if form.is_valid():
+            form.save()
+            return redirect("home")
+    todo_id = request.GET.get("id", None)
+    if todo_id is None:
+        return redirect("home")
+    
+    todo = models.Todo.objects.get(id=todo_id)
+    if todo.user != request.user:
+        return redirect("home")
+    
+    context = {"todo": todo, "expire": str(todo.expire.astimezone()).split("+")[0]}
+
+
+    return render(request, 'mvt/updateTodo.html', context=context)
