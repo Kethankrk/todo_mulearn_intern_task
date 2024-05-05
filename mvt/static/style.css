@@ -1,0 +1,15 @@
+#add-todo-modal  p{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+#add-todo-modal input, textarea {
+    border-radius: 20px;
+    padding: 4px 10px;
+}
+
+
+#id_expire::placeholder {
+    font-size: small;
+}
