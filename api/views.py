@@ -67,7 +67,7 @@ class todoView(APIView):
             todo_id = request.query_params.get("id", None)
             if todo_id is None:
                 return Response({"error": "query params todo 'id' required"})
-            todo =  Todo.objects.get(id=todo_id)
+            todo =  Todo.objects.get(id=todo_id, user=request.user)
             todo.delete()
             return Response({"message": "deletion success"}, status=204)
         except Todo.DoesNotExist:
