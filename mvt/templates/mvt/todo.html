@@ -3,7 +3,9 @@
         <p class="font-semibold">{{ todo.title }}</p>
         {% if todo.is_expired %}<p class="px-1 bg-orange-200 rounded-lg text-sm font-thin"> expired </p>{% endif %}
         <div class="flex gap-2">
-            <button class="rounded-md text-sm bg-yellow-200 px-2 py-2 hover:bg-yellow-300">Update</button>
+            <a href="update-todo/?id={{todo.id}}">
+                <button class="rounded-md text-sm bg-yellow-200 px-2 py-2 hover:bg-yellow-300">Update</button>
+            </a>
             <form method="POST" action="{% url 'delete_todo' %}">
                 {% csrf_token %}
                 <input type="hidden" name="todo_id" value="{{ todo.id }}">
