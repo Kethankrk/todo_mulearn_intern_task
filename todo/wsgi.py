@@ -16,6 +16,6 @@ from django.conf import settings
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "todo.settings")
 
 application = get_wsgi_application()
-application = WhiteNoise(application, root="./static")
+application = WhiteNoise(application)
 
 app = application
