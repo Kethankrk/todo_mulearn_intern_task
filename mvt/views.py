@@ -79,6 +79,8 @@ def markTodoDoneView(request):
 
 def todoLogView(request):
     user = request.user
+    if not user.is_authenticated:
+        return redirect("login")
     todos = user.todos.filter(completed=True)
     context = {'todos': todos}
     return render(request, 'mvt/todolog.html', context=context)
@@ -108,6 +110,8 @@ def todoUpdateView(request):
 
 def profileView(request):
     user = request.user
+    if not user.is_authenticated:
+        return redirect("login")
     todos = user.todos.all()
     total_todo = todos.count()
     completed_todo = todos.filter(completed=True).count()
