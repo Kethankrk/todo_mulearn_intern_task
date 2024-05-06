@@ -10,6 +10,6 @@ urlpatterns = [
     path("done", views.markTodoDoneView, name="done"),
     path("todolog", views.todoLogView, name="todolog"),
     path("update-todo/", views.todoUpdateView, name="update"),
-    path("profile/", views.profileView, name="profile"),
+    path("profilepage/", views.profileView, name="profilepage"),
     path("", views.homeView, name="home"),
 ]
